@@ -13,10 +13,6 @@
         android:dividerHeight="3dp"
         android:scrollbarStyle="outsideOverlay" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#7fd8d8d8" />
 
     <com.jialin.chat.MessageInputToolBox
         android:id="@+id/messageInputToolBox"
