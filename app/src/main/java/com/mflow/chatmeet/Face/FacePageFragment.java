@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet.Face;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.mflow.chatmeet.OnOperationListener;
 import com.mflow.chatmeet.R;
 
 @SuppressLint("InflateParams")

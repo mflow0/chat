@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet.Face;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,12 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
+import com.mflow.chatmeet.OnOperationListener;
+import com.mflow.chatmeet.Pager.PagerSlidingTabStrip.IconTabProvider;
 
 /**
- * 表情种类对应的 pagerAdapter
- * @author 仇加林
- *
+ *  이모티콘 adapter
  */
 public class FaceCategroyAdapter extends FragmentPagerAdapter implements IconTabProvider{
 	

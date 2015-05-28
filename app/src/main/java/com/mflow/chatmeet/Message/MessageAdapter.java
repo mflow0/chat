@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet.Message;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,18 +19,24 @@ import android.widget.TextView;
 
 import com.mflow.chatmeet.R;
 
-//import com.nostra13.universalimageloader.core.DisplayImageOptions;
-//import com.nostra13.universalimageloader.core.ImageLoader;
+/**
+ *
+ * 메시지를 보낼때 메시지가 담긴 레이아웃 뷰를 커스텀하게 만들어 정보를 실제로 구현해주는 알고리즘이 담긴 클래스
+ *
+ **/
 
 public class MessageAdapter extends BaseAdapter {
 	
 	private Context context;
+	LayoutInflater Inflater;
 	private List<Message> data = null;
 	
 	public MessageAdapter(Context context, List<Message> list) {
 		super();
 		this.context = context;
 		this.data = list;
+		Inflater = (LayoutInflater)context.getSystemService(
+				Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -58,8 +64,49 @@ public class MessageAdapter extends BaseAdapter {
 		return 2;
 	}
 
+    public List<Message> getData() {
+        return data;
+    }
 
-	
+    public void setData(List<Message> data) {
+        this.data = data;
+    }
+
+    //년도와 날짜가 같은지를 판별하는 method
+    public static boolean inSameDay(Date date1, Date Date2) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        int year1 = calendar.get(Calendar.YEAR);
+        int day1 = calendar.get(Calendar.DAY_OF_YEAR);
+
+        calendar.setTime(Date2);                            //date 객체의 날짜와 시간 정보를 현재 객체로 생성한다.
+        int year2 = calendar.get(Calendar.YEAR);            //현재 년도를 가져온다.
+        int day2 = calendar.get(Calendar.DAY_OF_YEAR);      //현재 년도의 날짜
+
+        if ((year1 == year2) && (day1 == day2)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    static class ViewHolder {
+
+        public ImageView	userAvatarImageView;    // 아바타 이미지
+        public TextView 	sendDateTextView;       //첫번째 필드 날짜
+        public TextView 	userNameTextView;       //글 입력시 나타나는 필드
+
+        public TextView 	textTextView;
+        public ImageView 	photoImageView;
+        public ImageView 	faceImageView;
+
+        public ImageView 	failImageView;          //실패 이미지
+        public TextView 	sendTimeTextView;
+        public ProgressBar 	sendingProgressBar;     //전송중 프로그레스바
+
+        public boolean 		isSend = true;
+    }
+
 	@SuppressLint("InflateParams")
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -92,14 +139,23 @@ public class MessageAdapter extends BaseAdapter {
 		}
 		
 		try {
-			String dateString = DateFormat.format("yyyy-MM-dd h:mmaa", message.getTime()).toString();
-			String [] t = dateString.split(" ");
+            //날짜를 분할하는 작업 년도 / 시간
+			String dateString = DateFormat.format(" yyyy년 MM월 dd일 ,aa h:mm", message.getTime()).toString();
+			String [] t = dateString.split(",");
+            String time_now = "";
 			viewHolder.sendDateTextView.setText(t[0]);
-			viewHolder.sendTimeTextView.setText(t[1]);
+
+            if (t[1].contains("AM")) {
+                time_now = t[1].replace("AM", "오전");
+            } else {
+                time_now = t[1].replace("PM", "오후");
+            }
+            viewHolder.sendTimeTextView.setText(time_now);
 			
-			if(position == 0){
+			if(position == 0){      //처음 글에해당하는 것이면 날짜를 보여준다. -- 상단에 나타나는 날짜를 화면에 한번만 보여주기 위한 작업
 				viewHolder.sendDateTextView.setVisibility(View.VISIBLE);
 			}else{
+                //데이터의 마지막에 작성한 글과 날짜가 지나 새로작성글을 판별하여 상단에 날짜를 표시하기 위한 작업
 				//TODO is same day ?
 				Message pmsg = data.get(position-1);
 				if(inSameDay(pmsg.getTime(), message.getTime())){
@@ -124,7 +180,7 @@ public class MessageAdapter extends BaseAdapter {
 			viewHolder.textTextView.setVisibility(View.VISIBLE);
 			viewHolder.photoImageView.setVisibility(View.GONE);
 			viewHolder.faceImageView.setVisibility(View.GONE);
-			if(message.getIsSend()){
+			if(message.getIsSend()){    //전송상태 판별 여부
 				LayoutParams sendTimeTextViewLayoutParams = (LayoutParams) viewHolder.sendTimeTextView.getLayoutParams();
 				sendTimeTextViewLayoutParams.addRule(RelativeLayout.LEFT_OF, R.id.textTextView);
 				viewHolder.sendTimeTextView.setLayoutParams(sendTimeTextViewLayoutParams);
@@ -241,55 +297,10 @@ public class MessageAdapter extends BaseAdapter {
 			viewHolder.faceImageView.setVisibility(View.GONE);
 			break;
 		}
-		
+
 //		viewHolder.textTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-		
+
 		return convertView;
 	}
-
-
-	public List<Message> getData() {
-		return data;
-	}
-
-	public void setData(List<Message> data) {
-		this.data = data;
-	}
-
-
-	public static boolean inSameDay(Date date1, Date Date2) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date1);
-		int year1 = calendar.get(Calendar.YEAR);
-		int day1 = calendar.get(Calendar.DAY_OF_YEAR);
-
-		calendar.setTime(Date2);
-		int year2 = calendar.get(Calendar.YEAR);
-		int day2 = calendar.get(Calendar.DAY_OF_YEAR);
-
-		if ((year1 == year2) && (day1 == day2)) {
-			return true;
-		}
-		return false;
-	}
-
-
-	static class ViewHolder {
-		
-		public ImageView	userAvatarImageView;
-		public TextView 	sendDateTextView;
-		public TextView 	userNameTextView;
-		
-		public TextView 	textTextView;
-		public ImageView 	photoImageView;
-		public ImageView 	faceImageView;
-		
-		public ImageView 	failImageView;
-		public TextView 	sendTimeTextView;
-		public ProgressBar 	sendingProgressBar;
-		
-		public boolean 		isSend = true;
-	}
-
 
 }

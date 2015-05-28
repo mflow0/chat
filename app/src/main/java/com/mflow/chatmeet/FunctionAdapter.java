@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.mflow.chatmeet.R;
 
 public class FunctionAdapter extends BaseAdapter {
 	private List<Option> data;

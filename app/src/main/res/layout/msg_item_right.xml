@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        >
 
         <TextView
             android:id="@+id/sendDateTextView"
@@ -24,8 +26,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginRight="2dp"
+        >
 
         <ImageView
             android:id="@+id/userAvatarImageView"
@@ -35,14 +37,17 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/avatar"
             android:focusable="false"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            />
 
         <TextView
             android:id="@+id/textTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/userAvatarImageView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/chatto_bg"
             android:clickable="true"
             android:focusable="true"
@@ -57,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/userAvatarImageView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
             android:background="@drawable/chatto_bg"
             android:clickable="true"
@@ -73,7 +79,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/userAvatarImageView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:clickable="true"
             android:focusable="true"
             android:gravity="left|center"
@@ -85,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
             android:layout_toLeftOf="@id/textTextView"
             android:clickable="true"
             android:focusable="true"

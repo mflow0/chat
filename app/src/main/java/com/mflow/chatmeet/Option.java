@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

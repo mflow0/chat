@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.astuetz;
+package com.mflow.chatmeet.Pager;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package com.jialin.chat;
+package com.mflow.chatmeet.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.astuetz.PagerSlidingTabStrip;
+import com.mflow.chatmeet.Face.FaceCategroyAdapter;
+import com.mflow.chatmeet.FunctionAdapter;
+import com.mflow.chatmeet.OnOperationListener;
+import com.mflow.chatmeet.Option;
+import com.mflow.chatmeet.Pager.PagerSlidingTabStrip;
 import com.mflow.chatmeet.R;
+
+/**
+ * 하단에 메시지를 입력해주는 툴 박스 나타내는 클래스이다.
+ * RelativeLayout 을 압축 정의(설계)해논 클래스
+ */
+
 
 public class MessageInputToolBox extends RelativeLayout {
 	
@@ -155,7 +165,7 @@ public class MessageInputToolBox extends RelativeLayout {
 				}
 			});
 			
-			//点击表情按钮
+			//이모티콘 버튼 클릭 시
 			faceButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -169,7 +179,7 @@ public class MessageInputToolBox extends RelativeLayout {
 				}
 			});
 			
-			//点击消息输入框
+			//텍스트 입력창 클릭 시 이모티콘 숨기기
 			messageEditText.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -251,6 +261,7 @@ public class MessageInputToolBox extends RelativeLayout {
 	}
 	
 	/**
+	 * 키보드 숨기기
 	 */
 	public static void hideKeyboard(Context context) {
 		Activity activity = (Activity) context;
@@ -263,6 +274,7 @@ public class MessageInputToolBox extends RelativeLayout {
 	}
 
 	/**
+	 * 키보드 보이기
 	 */
 	public static void showKeyboard(Context context) {
 		Activity activity = (Activity) context;
@@ -309,7 +321,7 @@ public class MessageInputToolBox extends RelativeLayout {
 		
 		for (int x = 0; x < (functionData.size() % 8 == 0 ? functionData.size() / 8 : (functionData.size() / 8) + 1); x++) {
 			GridView view = new GridView(context);
-			FunctionAdapter functionAdapter = new FunctionAdapter(context, 
+			FunctionAdapter functionAdapter = new FunctionAdapter(context,
 					functionData.subList(x * 8, 
 							((x + 1) * 8) > functionData.size() ? functionData.size() : ((x + 1) * 8)));
 			view.setAdapter(functionAdapter);

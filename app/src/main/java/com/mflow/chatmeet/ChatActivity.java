@@ -6,11 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jialin.chat.Message;
-import com.jialin.chat.MessageAdapter;
-import com.jialin.chat.MessageInputToolBox;
-import com.jialin.chat.OnOperationListener;
-import com.jialin.chat.Option;
+import com.mflow.chatmeet.Message.Message;
+import com.mflow.chatmeet.Message.MessageAdapter;
+import com.mflow.chatmeet.Message.MessageInputToolBox;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +23,7 @@ public class ChatActivity extends ActionBarActivity {
     private ListView listView;
     private MessageAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,6 @@ public class ChatActivity extends ActionBarActivity {
         initMessageInputToolBox();          //메시지를 추가해주는 툴 박스
 
         initListView();
-
     }
 
 
@@ -129,19 +127,15 @@ public class ChatActivity extends ActionBarActivity {
         //옵션 사용 끝
 
     }
+
     private void initListView(){
         listView = (ListView) findViewById(R.id.messageListview);
 
-        //create Data
-        Message message = new Message(Message.MSG_TYPE_TEXT, Message.MSG_STATE_SUCCESS, "Tom", "avatar", "Jerry", "avatar", "Hi", false, true, new Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24) * 8));
-
         List<Message> messages = new ArrayList<Message>();
-        messages.add(message);
 
         adapter = new MessageAdapter(this, messages);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     //답변을 해주는 메시지이며, 현재 데모 상태로 사용중에 있다.

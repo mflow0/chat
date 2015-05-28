@@ -35,15 +35,6 @@ public class Tutorial {
         adapter = new MessageAdapter(this, messages);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                box.hide();
-                return false;
-            }
-        });
-
     }
      **/
 }
